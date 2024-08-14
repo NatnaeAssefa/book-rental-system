@@ -1,36 +1,150 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Book Rental System
+
+A full-featured web application for managing book rentals. This project includes a React frontend and a Node.js backend with PostgreSQL as the database. The system provides functionalities for users to view, create, update, and delete books, manage book owners, and handle user interactions with a focus on role-based access control.
+
+## Features
+
+- **Frontend (React)**
+
+  - Modular and reusable components using Material UI.
+  - Material UI tables for listing entities (Books, Owners, Users).
+  - Dialogs for creating new entities.
+  - Seamless routing with React Router.
+- **Backend (Node.js & Express)**
+
+  - RESTful API endpoints for CRUD operations.
+  - Authentication with JSON Web Tokens (JWT).
+  - Authorization using CASL for fine-grained access control.
+  - Data persistence with PostgreSQL.
+- **Database**
+
+  - PostgreSQL schema for storing and managing book, owner, and user data.
+- **Validation & Security**
+
+  - Input validation with Zod.
+  - Role-based access control with CASL.
+
+## Folder Structure
+
+```
+/backend
+  /controllers
+    bookController.js
+    ownerController.js
+    userController.js
+  /models
+    Book.js
+    Owner.js
+    User.js
+    index.js
+  /routes
+    bookRoutes.js
+    ownerRoutes.js
+    userRoutes.js
+  /config
+    database.js
+  app.js
+  package.json
+
+/frontend
+  /src
+    /components
+      BookList.js
+      CreateBook.js
+      OwnerList.js
+      CreateOwner.js
+      CreateUser.js
+      UserList.js
+    /pages
+      BooksPage.js
+      OwnersPage.js
+      UsersPage.js
+    App.js
+    index.js
+  package.json
+```
 
 ## Getting Started
 
-First, run the development server:
+### Backend
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Install Dependencies:**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```bash
+   cd backend
+   npm install
+   ```
+2. **Configure the Database:**
+   Update the database connection settings in `/backend/config/database.js`.
+3. **Run Migrations:**
+   Make sure you have PostgreSQL running and execute migrations to set up the database schema.
+4. **Start the Server:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   npm start
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Frontend
 
-## Learn More
+1. **Install Dependencies:**
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   cd frontend
+   npm install
+   ```
+2. **Start the Development Server:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   npm start
+   ```
+3. **Access the Application:**
+   Open your browser and go to `http://localhost:3000`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## API Endpoints
 
-## Deploy on Vercel
+- **Books:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  - `GET /api/books` - List all books
+  - `POST /api/books/create` - Create a new book
+  - `PUT /api/books/:id` - Update a book
+  - `DELETE /api/books/:id` - Delete a book
+- **Owners:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  - `GET /api/owners` - List all owners
+  - `POST /api/owners/create` - Create a new owner
+  - `PUT /api/owners/:id` - Update an owner
+  - `DELETE /api/owners/:id` - Delete an owner
+- **Users:**
+
+  - `GET /api/users` - List all users
+  - `POST /api/users/create` - Create a new user
+  - `PUT /api/users/:id` - Update a user
+  - `DELETE /api/users/:id` - Delete a user
+
+## Contributing
+
+Contributions are welcome! Please follow these steps to contribute:
+
+1. **Fork the Repository**
+2. **Create a New Branch:**
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+3. **Make Your Changes**
+4. **Commit Your Changes:**
+   ```bash
+   git commit -am 'Add some feature'
+   ```
+5. **Push to the Branch:**
+   ```bash
+   git push origin feature/your-feature
+   ```
+6. **Open a Pull Request**
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Feel free to adjust the content based on any specific details or instructions for your project.
