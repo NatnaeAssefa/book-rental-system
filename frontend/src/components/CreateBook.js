@@ -23,6 +23,8 @@ function CreateBook({ open, onClose }) {
   };
 
   const handleSubmit = () => {
+    const bookId = Math.random().toString;
+    bookData.id = bookId; 
     axios.post('http://localhost:5000/api/books', bookData)
       .then(() => {
         alert('Book created successfully');
