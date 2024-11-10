@@ -1,29 +1,33 @@
-const { Owner } = require('../models');
+const { PrismaClient } = require("@prisma/client");
+
+const prisma = new PrismaClient();
 
 exports.createOwner = async (req, res) => {
   try {
-    const owner = await Owner.create(req.body);
+    const owner = await prisma.owner.create({
+      data: req.body,
+    });
     res.status(201).json(owner);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create owner' });
+    res.status(500).json({ error: error });
   }
 };
 
 exports.getOwners = async (req, res) => {
   try {
-    const owners = await Owner.findAll();
+    const owners = await prisma.owner.findMany();
     res.status(200).json(owners);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch owners' });
+    res.status(500).json({ error: error });
   }
 };
 
 exports.deleteOwner = async (req, res) => {
   try {
     const { id } = req.params;
-    await Owner.destroy({ where: { id } });
-    res.status(200).json({ message: 'Owner deleted' });
+    await prisma.owner.delete({ where: { id } });
+    res.status(200).json({ message: "Owner deleted" });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete owner' });
+    res.status(500).json({ error: error });
   }
 };

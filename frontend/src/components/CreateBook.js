@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 
 function CreateBook({ open, onClose }) {
   const [bookData, setBookData] = useState({
-    bookNumber: '',
+    bookNumber: 0,
     bookName: '',
     status: '',
     price: '',
@@ -18,7 +18,7 @@ function CreateBook({ open, onClose }) {
   const handleChange = (e) => {
     setBookData({
       ...bookData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.name === 'bookNumber' ? Number(e.target.value) : e.target.name === 'price' ? Number(e.target.value) : e.target.value,
     });
   };
 
@@ -28,7 +28,7 @@ function CreateBook({ open, onClose }) {
     axios.post('http://localhost:5000/api/books', bookData)
       .then(() => {
         alert('Book created successfully');
-        setBookData({ bookNumber: '', bookName: '', status: '', price: '' });
+        setBookData({ bookNumber: 0, bookName: '', status: '', price: '' });
         onClose();
       })
       .catch(error => console.error(error));
@@ -43,7 +43,7 @@ function CreateBook({ open, onClose }) {
           margin="dense"
           name="bookNumber"
           label="Book Number"
-          type="text"
+          type="number"
           fullWidth
           value={bookData.bookNumber}
           onChange={handleChange}
